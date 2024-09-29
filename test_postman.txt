@@ -1,0 +1,157 @@
+Project Structure:
+
+/project-root
+│
+├── /config
+│   └── db.js                     // Database connection setup
+│
+├── /controllers
+│   ├── dbControllers.js          // Handles CRUD operations for database models
+│   └── userControllers.js        // Handles user-related operations (registration, login, profile)
+│
+├── /middleware
+|   ├── authMiddleware.js         // Middleware to handle authentication (JWT verification)
+│   └── errorHandler.js
+│
+├── /models
+│   ├── Category.js               // Schema for categories (name)
+│   ├── User.js                   // Schema for users (name, username, email, password)
+│   └── Post.js                   // Schema for posts (title, body, author, categories)
+│
+├── /routes
+│   ├── dbRoutes.js               // Routes for database operations (CRUD for models)
+│   └── userRoutes.js             // Routes for user operations (register, login, profile)
+│
+├── server.js                      // Main server file to start the application
+└── package.json                   // Project dependencies and scripts
+
+Test Data for Postman
+
+    User Registration
+
+Endpoint: POST http://localhost:3000/auth/register
+
+Body (json):
+
+json
+
+{
+  "name": "John Doe",
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+
+    User Login
+
+Endpoint: POST http://localhost:3000/auth/login
+
+Body (json):
+
+json
+
+{
+  "username": "johndoe",
+  "password": "password123"
+}
+
+Response (json):
+
+json
+
+{
+  "token": "your_jwt_token"
+}
+
+    Get User Profile
+
+Endpoint: GET http://localhost:3000/auth/profile
+
+Headers:
+
+makefile
+
+Authorization: Bearer your_jwt_token
+
+Example:
+
+makefile
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmY5MmU4MmQxNmEwMTc3ODM4MWI2OTQiLCJpYXQiOjE3Mjc2MDY1MjUsImV4cCI6MTcyNzYxMDEyNX0.JWJbcVKlefY33fJtki9StFcog6TobGPwxCJ58PC-Hlg
+
+    Create a Category
+
+Endpoint: POST http://localhost:3000/db/create
+
+Body (json):
+
+json
+
+{
+  "modelName": "Category",
+  "data": {
+    "name": "Technology"
+  }
+}
+
+    Create a Post
+
+Endpoint: POST http://localhost:3000/db/create
+
+Body (json):
+
+json
+
+{
+  "modelName": "Post",
+  "data": {
+    "title": "New Post About Technology",
+    "body": "This is a great post about the latest trends in technology.",
+    "author": "user_id",  // replace with actual user_id
+    "categories": ["category_id"]  // replace with actual category_id
+  }
+}
+
+    Get All Posts
+
+Endpoint: GET http://localhost:3000/db/all
+
+Body (json):
+
+json
+
+{
+  "modelName": "Post"
+}
+
+    Update a Post
+
+Endpoint: PUT http://localhost:3000/db/update
+
+Body (json):
+
+json
+
+{
+  "modelName": "Post",
+  "id": "post_id",  // replace with actual post_id
+  "data": {
+    "title": "Updated Post Title",
+    "body": "Updated post content"
+  }
+}
+
+    Delete a Post
+
+Endpoint: DELETE http://localhost:3000/db/delete
+
+Body (json):
+
+json
+
+{
+  "modelName": "Post",
+  "id": "post_id"  // replace with actual post_id
+}
+
+
